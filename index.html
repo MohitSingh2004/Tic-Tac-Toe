@@ -9,6 +9,10 @@
     />
     <link rel="stylesheet" href="Assets/TicTacToe.css" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
+      type="module"
+    ></script>
 
     <!--  -->
     <script
@@ -38,7 +42,16 @@
             loop
           ></dotlottie-wc>
         </div>
-        <p class="start-message">LET'S START THE GAME</p>
+        <div class="wishes" id="wishes" style="display: none">
+          <dotlottie-wc
+            src="https://lottie.host/3350e2ef-355d-42f3-9ea3-30e89f41ecad/60hKoCtfeW.lottie"
+            style="width: 400px; height: 200px; margin-top: -40px"
+            speed="1"
+            autoplay
+            loop
+          ></dotlottie-wc>
+        </div>
+        <p class="start-message" id="start-message">LET'S START THE GAME</p>
       </div>
 
       <div class="game-area">
