@@ -18,9 +18,8 @@ let StartGame = document.getElementById("Start");
 let gamecontainer = document.getElementById("gamecontainer");
 let resetsection = document.getElementById("reset-section");
 let loading = document.getElementById("Loading");
-let wishes = document.getElementById("wishes");
+// let wishes = document.getElementById("wishes");
 let info = document.querySelector(".Info");
-let playagain = document.getElementById("start-message");
 
 // Start / Restart Button
 StartGame.addEventListener("click", () => {
@@ -47,9 +46,9 @@ StartGame.addEventListener("click", () => {
     document.querySelector(".line").style.width = "0vw";
     document.querySelector(".line").style.transform = "none";
 
-    wishes.style.display = "none";
-    gamecontainer.style.display = "flex";
-    info.style.display = "flex";
+    // wishes.style.display = "none";
+    // gamecontainer.style.display = "flex";
+    // info.style.display = "flex";
     info.innerText = "Turn for " + turn;
   }
 });
@@ -100,20 +99,20 @@ const checkWin = () => {
       ).style.transform = `translate(${e[3]}px,${e[4]}px) rotate(${e[5]}deg)`;
 
       gameover = true;
-      setTimeout(() => {
-        playagain.style.display = "none";
-        wishes.style.display = "flex";
-        container.style.display = "none";
-        info.style.display = "flex";
-        gamewin.play();
-      }, 2000);
+      // setTimeout(() => {
+      // wishes.style.display = "flex";
+      gamecontainer.style.display = "flex";
+      fireCrackers();
+      info.style.display = "flex";
+      gamewin.play();
+      // }, 2000);
     }
   });
 
   // Draw Checker
   let arr = Array.from(boxtext).filter((el) => el.innerText !== "");
   if (arr.length === 9 && !gameover) {
-    info.innerText = "Oops! No one wins 😅";
+    info.innerText = "Oops! No one wins";
     gameover = true;
     gameloose.play();
   }
@@ -131,3 +130,41 @@ word.split("").forEach((letter, index) => {
   letterElement.setAttribute("data-aos-anchor-placement", "top-bottom");
   lettersContainer.appendChild(letterElement);
 });
+
+function fireCrackers() {
+  var count = 200;
+  var defaults = {
+    origin: { y: 0.7 },
+  };
+
+  function fire(particleRatio, opts) {
+    confetti({
+      ...defaults,
+      ...opts,
+      particleCount: Math.floor(count * particleRatio),
+    });
+  }
+
+  fire(0.25, {
+    spread: 26,
+    startVelocity: 55,
+  });
+  fire(0.2, {
+    spread: 60,
+  });
+  fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8,
+  });
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.2,
+  });
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 45,
+  });
+}
