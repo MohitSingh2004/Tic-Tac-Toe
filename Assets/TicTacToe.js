@@ -7,6 +7,8 @@ let gamewin = new Audio("Assets/TuneForWinner.wav");
 let turn = "X";
 let gameover = false;
 let GameRunning = false;
+let gameMode = false;
+let cpuModeActive = false;
 
 // Turn change function
 const changeTurn = () => {
@@ -16,48 +18,102 @@ const changeTurn = () => {
 // DOM Elements
 let StartGame = document.getElementById("Start");
 let gamecontainer = document.getElementById("gamecontainer");
-let resetsection = document.getElementById("reset-section");
+// let resetsection = document.getElementById("reset-section");
 let loading = document.getElementById("Loading");
-// let wishes = document.getElementById("wishes");
+let Single = document.getElementById("Single");
+let Multiplayer = document.getElementById("Multiplayer");
+let startMessage = document.getElementById("start-message");
+let Mode = document.getElementById("gameMode");
 let info = document.querySelector(".Info");
 
 // Start / Restart Button
 StartGame.addEventListener("click", () => {
-  if (GameRunning == false) {
-    loading.style.display = "flex";
-    setTimeout(() => {
-      gamecontainer.style.display = "flex";
-      gamecontainer.classList.remove("pop-in");
-      void gamecontainer.offsetWidth;
-      gamecontainer.classList.add("pop-in");
-      loading.style.display = "none";
+  Mode.style.display = "flex";
+  Single.style.display = "flex";
+  Multiplayer.style.display = "flex";
+  startMessage.innerText = "Choose Your Game Mode ";
+  gameMode = true;
 
-      GameRunning = true;
-      StartGame.innerText = "Restart";
-    }, 2000);
-  } else {
-    // Reset Game
+  // Reset Game
+  if (gameMode === true) {
     let boxtexts = document.querySelectorAll(".boxtext");
     Array.from(boxtexts).forEach((element) => {
       element.innerText = "";
     });
+    startMessage.innerText = "Enjoy the Game";
     turn = "X";
     gameover = false;
     document.querySelector(".line").style.width = "0vw";
     document.querySelector(".line").style.transform = "none";
-
-    // wishes.style.display = "none";
-    // gamecontainer.style.display = "flex";
-    // info.style.display = "flex";
     info.innerText = "Turn for " + turn;
   }
+
+  Multiplayer.addEventListener("click", () => {
+    startMessage.innerText = "";
+    Mode.innerText = "";
+    if (GameRunning == false) {
+      loading.style.display = "flex";
+      setTimeout(() => {
+        startMessage.innerText = "Enjoy the Game";
+        gamecontainer.style.display = "flex";
+        gamecontainer.classList.remove("pop-in");
+        void gamecontainer.offsetWidth;
+        loading.style.display = "none";
+        gamecontainer.classList.add("pop-in");
+
+        GameRunning = true;
+        StartGame.innerText = "Restart";
+      }, 2000);
+    }
+  });
+  Single.addEventListener("click", () => {
+    turn = "X";
+    cpuModeActive = true;
+    startMessage.innerText = "";
+    Mode.innerText = "";
+    if (GameRunning == false) {
+      loading.style.display = "flex";
+      setTimeout(() => {
+        startMessage.innerText = "Enjoy the Game";
+        gamecontainer.style.display = "flex";
+        gamecontainer.classList.remove("pop-in");
+        void gamecontainer.offsetWidth;
+        loading.style.display = "none";
+        GameRunning = true;
+        gamecontainer.classList.add("pop-in");
+        StartGame.innerText = "Restart";
+      }, 2000);
+    }
+  });
 });
+
+function cpuMode() {
+  let boxtext = document.querySelectorAll(".boxtext");
+  cpuModeActive = true;
+  let emptyBoxes = [];
+
+  for (let i = 0; i < boxtext.length; i++) {
+    if (boxtext[i].innerText === "") {
+      emptyBoxes.push(boxtext[i]);
+    }
+  }
+
+  if (emptyBoxes.length > 0) {
+    let cpuRandom = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
+    cpuRandom.innerText = turn;
+    turn = changeTurn();
+    checkWin();
+    if (!gameover) {
+      info.innerText = "Turn for " + turn;
+    }
+  }
+}
 
 // Game Logic
 let boxes = document.getElementsByClassName("box");
 Array.from(boxes).forEach((element) => {
   let boxtext = element.querySelector(".boxtext");
-  boxtext.innerText = "";
+  boxtext.innerText == "";
   element.addEventListener("click", () => {
     if (boxtext.innerText === "" && !gameover) {
       boxtext.innerText = turn;
@@ -66,6 +122,11 @@ Array.from(boxes).forEach((element) => {
       if (!gameover) {
         turn = changeTurn();
         info.innerText = "Turn for " + turn;
+        if (cpuModeActive && turn === "O") {
+          setTimeout(() => {
+            cpuMode();
+          }, 400);
+        }
       }
     }
   });
@@ -77,7 +138,7 @@ const checkWin = () => {
   let wins = [
     [0, 1, 2, 8.6, 50.2, 180],
     [3, 4, 5, 8.6, 153.2, 180],
-    [6, 7, 8, 8.6, 255.2, 90],
+    [6, 7, 8, 8.6, 255.2, 180],
     [0, 3, 6, -93.8, 152, 90],
     [1, 4, 7, 10.6, 152, 90],
     [2, 5, 8, 112.6, 152, 90],
@@ -97,15 +158,11 @@ const checkWin = () => {
       document.querySelector(
         ".line"
       ).style.transform = `translate(${e[3]}px,${e[4]}px) rotate(${e[5]}deg)`;
-
       gameover = true;
-      // setTimeout(() => {
-      // wishes.style.display = "flex";
       gamecontainer.style.display = "flex";
       fireCrackers();
       info.style.display = "flex";
       gamewin.play();
-      // }, 2000);
     }
   });
 
@@ -121,7 +178,6 @@ const checkWin = () => {
 // Branding Animation: SENTI
 const lettersContainer = document.getElementById("letters-container");
 const word = "SENTI";
-
 word.split("").forEach((letter, index) => {
   const letterElement = document.createElement("p");
   letterElement.textContent = letter;
