@@ -100,8 +100,6 @@ function cpuMode() {
   }
 
   if (emptyBoxes.length > 0) {
-    info.innerText = "Turn for Mohit (CPU)... Thinking 🤔";
-
     setTimeout(() => {
       let cpuIndex = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
       boxtext[cpuIndex].innerText = turn;
