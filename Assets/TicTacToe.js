@@ -49,6 +49,7 @@ StartGame.addEventListener("click", () => {
   }
 
   Multiplayer.addEventListener("click", () => {
+    StartGame.innerText = "Loading";
     startMessage.innerText = "";
     Mode.innerText = "";
     if (GameRunning == false) {
@@ -67,6 +68,7 @@ StartGame.addEventListener("click", () => {
     }
   });
   Single.addEventListener("click", () => {
+    StartGame.innerText = "Loading";
     turn = "X";
     cpuModeActive = true;
     startMessage.innerText = "";
