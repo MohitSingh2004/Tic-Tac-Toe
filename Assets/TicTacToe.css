@@ -11,7 +11,7 @@ body {
   flex-direction: column;
   align-items: center;
 }
-#Start {
+#Start, #Single ,#Multiplayer {
   padding: 0.8rem 1.5rem;
   margin-bottom: 1rem;
   background-color: transparent;
@@ -27,7 +27,7 @@ body {
   transition: all 0.4s ease;
   flex-shrink: 0;
 }
-#Start::before {
+#Start::before,#Single::before ,#Multiplayer::before  {
   content: "";
   position: absolute;
   top: 0;
@@ -52,13 +52,13 @@ body {
   z-index: -1;
 }
 
-#Start:hover {
+#Start:hover , #Single:hover  ,#Multiplayer:hover {
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(239, 68, 53, 0.3);
 }
 
-#Start:hover::before {
+#Start:hover::before,#Single:hover::before ,#Multiplayer:hover::before  {
   transform: translateY(0);
 }
 
@@ -101,6 +101,14 @@ body {
 #reset:hover::before {
   transform: translateY(0);
 }
+#gameMode{
+justify-content: center;
+align-items: center;
+display: flex;
+gap: 15px;
+}
+
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -151,7 +159,7 @@ body {
 
 .start-message {
   font-size: 1.5rem;
-  margin-bottom: 5px;
+  margin-bottom: 18px;
   color: rgb(160, 114, 28);
   margin-top: 10px;
   font-weight: bold;
