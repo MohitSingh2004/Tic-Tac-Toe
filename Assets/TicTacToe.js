@@ -91,23 +91,27 @@ StartGame.addEventListener("click", () => {
 
 function cpuMode() {
   let boxtext = document.querySelectorAll(".boxtext");
-  cpuModeActive = true;
   let emptyBoxes = [];
 
   for (let i = 0; i < boxtext.length; i++) {
     if (boxtext[i].innerText === "") {
-      emptyBoxes.push(boxtext[i]);
+      emptyBoxes.push(i);
     }
   }
 
   if (emptyBoxes.length > 0) {
-    let cpuRandom = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
-    cpuRandom.innerText = turn;
-    turn = changeTurn();
-    checkWin();
-    if (!gameover) {
-      info.innerText = "Turn for " + turn;
-    }
+    info.innerText = "Turn for Mohit (CPU)... Thinking 🤔";
+
+    setTimeout(() => {
+      let cpuIndex = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
+      boxtext[cpuIndex].innerText = turn;
+      turnAudio.play();
+      checkWin();
+      if (!gameover) {
+        turn = changeTurn();
+        info.innerText = "Turn for " + turn;
+      }
+    }, 2000);
   }
 }
 
