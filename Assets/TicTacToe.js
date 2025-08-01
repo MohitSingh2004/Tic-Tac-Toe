@@ -111,7 +111,7 @@ function cpuMode() {
         turn = changeTurn();
         info.innerText = "Turn for " + turn;
       }
-    }, 2000);
+    }, 200);
   }
 }
 
