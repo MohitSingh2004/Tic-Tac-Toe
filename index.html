@@ -13,13 +13,11 @@
       src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
       type="module"
     ></script>
-
     <!--  -->
     <script
       src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
       type="module"
     ></script>
-
     <title>Tic Tac Toe</title>
   </head>
   <body>
@@ -33,6 +31,15 @@
         <div class="Startgame">
           <button id="Start" class="Start">START</button>
         </div>
+        <div id="gameMode" class="gameMode" style="display: none">
+          <button id="Single" class="Start" style="display: none">
+            VS Mohit
+          </button>
+          <button id="Multiplayer" class="Start" style="display: none">
+            Multiplayer
+          </button>
+        </div>
+
         <div class="Loading" id="Loading" style="display: none">
           <dotlottie-wc
             src="https://lottie.host/313358c7-d0a1-4bff-84d9-d38753568164/WtUuV90pJZ.lottie"
@@ -44,15 +51,6 @@
         </div>
         <p class="start-message" id="start-message">LET'S START THE GAME</p>
       </div>
-      <!-- <div class="wishes" id="wishes" style="display: none">
-          <dotlottie-wc
-            src="https://lottie.host/3350e2ef-355d-42f3-9ea3-30e89f41ecad/60hKoCtfeW.lottie"
-            style="width: 400px; height: 200px; margin-top: -40px"
-            speed="1"
-            autoplay
-            loop
-          ></dotlottie-wc>
-        </div> -->
 
       <div class="game-area">
         <div class="gamecontainer" id="gamecontainer" style="display: none">
@@ -97,7 +95,6 @@
       </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="Assets/TicTacToe.js"></script>
   </body>
